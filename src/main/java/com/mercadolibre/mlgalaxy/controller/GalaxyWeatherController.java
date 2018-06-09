@@ -28,7 +28,7 @@ public class GalaxyWeatherController {
      */
     @RequestMapping("/clima")
     public final GalaxyWeather weatherByDay(@RequestParam(name="dia") Optional<Integer> day) {
-        day.orElseThrow(() -> new IllegalArgumentException("day"));
+        day.orElseThrow(() -> new IllegalArgumentException("dia"));
         return galaxyWeatherService.weatherByDay(day.get()).orElseThrow(() -> new ResourceNotFoundException());
     }
 }

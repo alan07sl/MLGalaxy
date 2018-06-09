@@ -3,6 +3,7 @@ package com.mercadolibre.mlgalaxy.controller;
 import com.mercadolibre.mlgalaxy.model.weather.WeatherStatictics;
 import com.mercadolibre.mlgalaxy.service.WeatherStaticticsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,6 @@ public class WeatherStaticticsController {
      */
     @RequestMapping("/estadisticas")
     public final WeatherStatictics statictics() {
-        return weatherStaticticsService.getStatictics();
+        return weatherStaticticsService.getStatictics().orElseThrow(() -> new ResourceNotFoundException());
     }
 }

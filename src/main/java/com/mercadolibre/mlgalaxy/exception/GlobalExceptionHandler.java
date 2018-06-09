@@ -35,12 +35,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 
     protected static final String ERROR_KEY = "Error";
     private final String ERROR_DEFAULT_MESSAGE = "An error has occurred";
-    private final String REQUIRED_PARAMETER_NOT_PRESENT_ERROR_MESSAGE = "A required parameter is missing";
+    private final String REQUIRED_PARAMETER_NOT_PRESENT_ERROR_MESSAGE = "A required parameter is missing: ";
     private final String RESOURCE_NOT_FOUND = "The resource is not present";
 
     @ExceptionHandler(value = { IllegalArgumentException.class })
     protected ResponseEntity<Object> handleIllegalArgument(RuntimeException ex, WebRequest request) {
-        String bodyOfResponse = REQUIRED_PARAMETER_NOT_PRESENT_ERROR_MESSAGE;
+        String bodyOfResponse = REQUIRED_PARAMETER_NOT_PRESENT_ERROR_MESSAGE + "\"" + ex.getLocalizedMessage() + "\"";
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }

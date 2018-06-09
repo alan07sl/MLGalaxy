@@ -52,8 +52,12 @@ public class GalaxyWeatherControllerTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    private ResponseEntity<String> getStringResponseEntity(Integer day) {
+        return restTemplate.getForEntity(URL + port + "/clima?dia={day}", String.class, day);
+    }
+
     @Test
-    public void weatherByExistingDay() throws JsonProcessingException{
+    public void weatherByExistingDayTest() throws JsonProcessingException{
         ObjectMapper mapper = new ObjectMapper();
 
         Integer day = ArgumentMatchers.anyInt();
@@ -62,28 +66,28 @@ public class GalaxyWeatherControllerTest {
         aGalaxyWeather.setWeather(GalaxyWeatherType.RAIN);
 
         when(galaxyWeatherService.weatherByDay(day)).thenReturn(Optional.of(aGalaxyWeather));
-        ResponseEntity<String> response = restTemplate.getForEntity(URL + port + "/clima?dia={day}", String.class, day);
+        ResponseEntity<String> response = getStringResponseEntity(day);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
         assertThat(response.getBody(), equalTo(mapper.writeValueAsString(aGalaxyWeather)));
     }
 
     @Test
-    public void weatherByDayNullParameter() {
-        Integer day = ArgumentMatchers.isNull();
+    public void weatherByDayNullParameterTest() {
+        Integer day = null;
 
-        ResponseEntity<String> response = restTemplate.getForEntity(URL + port + "/clima?dia={day}", String.class, day);
+        ResponseEntity<String> response = getStringResponseEntity(day);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.BAD_REQUEST));
         assertThat(response.getBody(), equalTo(REQUIRED_PARAMETER_NOT_PRESENT_ERROR_MESSAGE));
     }
 
     @Test
-    public void weatherByNonExistingDay() {
+    public void weatherByNonExistingDayTest() {
         Integer day = ArgumentMatchers.anyInt();
 
         when(galaxyWeatherService.weatherByDay(day)).thenReturn(Optional.empty());
-        ResponseEntity<String> response = restTemplate.getForEntity(URL + port + "/clima?dia={day}", String.class, day);
+        ResponseEntity<String> response = getStringResponseEntity(day);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.NOT_FOUND));
         assertThat(response.getBody(), equalTo(RESOURCE_NOT_FOUND));
