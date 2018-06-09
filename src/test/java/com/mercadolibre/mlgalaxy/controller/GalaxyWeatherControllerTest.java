@@ -1,11 +1,15 @@
 package com.mercadolibre.mlgalaxy.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercadolibre.mlgalaxy.model.weather.GalaxyWeather;
+import com.mercadolibre.mlgalaxy.model.weather.GalaxyWeatherType;
 import com.mercadolibre.mlgalaxy.service.GalaxyWeatherService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,10 @@ public class GalaxyWeatherControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    @InjectMocks
+    private GalaxyWeatherController galaxyWeatherController;
+
     @LocalServerPort
     private int port;
 
@@ -45,17 +53,27 @@ public class GalaxyWeatherControllerTest {
     }
 
     @Test
-    public void weatherByExistingDay() {
+    public void weatherByExistingDay() throws JsonProcessingException{
+        ObjectMapper mapper = new ObjectMapper();
+
         Integer day = ArgumentMatchers.anyInt();
-        when(galaxyWeatherService.weatherByDay(day)).thenReturn(Optional.of(new GalaxyWeather()));
+        GalaxyWeather aGalaxyWeather = new GalaxyWeather();
+        aGalaxyWeather.setDay(day);
+        aGalaxyWeather.setWeather(GalaxyWeatherType.RAIN);
+
+        when(galaxyWeatherService.weatherByDay(day)).thenReturn(Optional.of(aGalaxyWeather));
         ResponseEntity<String> response = restTemplate.getForEntity(URL + port + "/clima?dia={day}", String.class, day);
+
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(response.getBody(), equalTo(mapper.writeValueAsString(aGalaxyWeather)));
     }
 
     @Test
     public void weatherByDayNullParameter() {
         Integer day = ArgumentMatchers.isNull();
+
         ResponseEntity<String> response = restTemplate.getForEntity(URL + port + "/clima?dia={day}", String.class, day);
+
         assertThat(response.getStatusCode(), equalTo(HttpStatus.BAD_REQUEST));
         assertThat(response.getBody(), equalTo(REQUIRED_PARAMETER_NOT_PRESENT_ERROR_MESSAGE));
     }
@@ -63,8 +81,10 @@ public class GalaxyWeatherControllerTest {
     @Test
     public void weatherByNonExistingDay() {
         Integer day = ArgumentMatchers.anyInt();
+
         when(galaxyWeatherService.weatherByDay(day)).thenReturn(Optional.empty());
         ResponseEntity<String> response = restTemplate.getForEntity(URL + port + "/clima?dia={day}", String.class, day);
+
         assertThat(response.getStatusCode(), equalTo(HttpStatus.NOT_FOUND));
         assertThat(response.getBody(), equalTo(RESOURCE_NOT_FOUND));
     }

@@ -1,6 +1,7 @@
 package com.mercadolibre.mlgalaxy.model.weather;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -13,7 +14,9 @@ public class GalaxyWeather {
 
     @JsonIgnore
     private Integer id;
+    @JsonProperty("clima")
     private GalaxyWeatherType weather;
+    @JsonProperty("dia")
     private Integer day;
 
     /**
