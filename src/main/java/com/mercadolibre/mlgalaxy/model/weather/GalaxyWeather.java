@@ -9,13 +9,17 @@ import javax.persistence.*;
  * Model class of the weather on the galaxy by type and day.
  */
 @Entity
-@Table(name = "WEATHER", indexes = { @Index(name = "DAY_INDEX", columnList = "day") })
+@Table(name = "WEATHER", indexes = { @Index(name = "DAY_INDEX", columnList = "DAY") })
 public class GalaxyWeather {
 
+    @Id
+    @GeneratedValue
     @JsonIgnore
     private Integer id;
+    @Enumerated
     @JsonProperty("clima")
     private GalaxyWeatherType weather;
+    @Column(name = "DAY", nullable = false)
     @JsonProperty("dia")
     private Integer day;
 
@@ -42,8 +46,6 @@ public class GalaxyWeather {
     /**
      * @return the id
      */
-    @Id
-    @GeneratedValue
     public final Integer getId() {
         return id;
     }
@@ -59,7 +61,6 @@ public class GalaxyWeather {
     /**
      * @return the weather type
      */
-    @Enumerated
     public final GalaxyWeatherType getWeather() {
         return weather;
     }
@@ -75,7 +76,6 @@ public class GalaxyWeather {
     /**
      * @return the day
      */
-    @Column(name = "day", nullable = false)
     public final Integer getDay() {
         return day;
     }

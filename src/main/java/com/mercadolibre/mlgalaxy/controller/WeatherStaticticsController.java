@@ -1,6 +1,6 @@
 package com.mercadolibre.mlgalaxy.controller;
 
-import com.mercadolibre.mlgalaxy.model.weather.WeatherStatictics;
+import com.mercadolibre.mlgalaxy.model.statictics.WeatherStatictics;
 import com.mercadolibre.mlgalaxy.service.WeatherStaticticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;

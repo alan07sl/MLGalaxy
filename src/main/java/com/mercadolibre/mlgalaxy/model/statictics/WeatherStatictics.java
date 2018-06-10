@@ -1,6 +1,8 @@
-package com.mercadolibre.mlgalaxy.model.weather;
+package com.mercadolibre.mlgalaxy.model.statictics;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mercadolibre.mlgalaxy.model.weather.GalaxyWeather;
+import com.mercadolibre.mlgalaxy.model.weather.WeatherQuantity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,11 +16,17 @@ import java.util.stream.Collectors;
 @Table(name = "STATICTICS")
 public class WeatherStatictics {
 
+    @Id
+    @GeneratedValue
     @JsonIgnore
     private Integer id;
+    @Column(name = "RAIN_MAX_DAY", nullable = false)
     private Integer rainMaxDay;
+    @OneToMany(cascade = { CascadeType.ALL })
+    @JoinColumn(name = "F_STATICTICS_ID")
     private List<WeatherQuantity> QuantityWeather;
-
+    @OneToMany(cascade = { CascadeType.ALL })
+    @JoinColumn(name = "F_STATICTICS_ID")
     @JsonIgnore
     private List<GalaxyWeather> weathers;
 
@@ -51,8 +59,6 @@ public class WeatherStatictics {
     /**
      * @return the id
      */
-    @Id
-    @GeneratedValue
     public Integer getId() {
         return id;
     }
@@ -68,7 +74,6 @@ public class WeatherStatictics {
     /**
      * @return the rainMaxDay
      */
-    @Column(name = "RAIN_MAX_DAY", nullable = false)
     public Integer getRainMaxDay() {
         return rainMaxDay;
     }
@@ -84,8 +89,6 @@ public class WeatherStatictics {
     /**
      * @return Weathers
      */
-    @OneToMany(cascade = { CascadeType.ALL })
-    @JoinColumn(name = "F_STATICTICS_ID")
     public List<GalaxyWeather> getWeathers() {
         return weathers;
     }
@@ -101,8 +104,6 @@ public class WeatherStatictics {
     /**
      * @return QuantityWeather
      */
-    @OneToMany(cascade = { CascadeType.ALL })
-    @JoinColumn(name = "F_STATICTICS_ID")
     public List<WeatherQuantity> getQuantityWeather() {
         return QuantityWeather;
     }

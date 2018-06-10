@@ -1,6 +1,6 @@
 package com.mercadolibre.mlgalaxy.service.impl;
 
-import com.mercadolibre.mlgalaxy.model.weather.WeatherStatictics;
+import com.mercadolibre.mlgalaxy.model.statictics.WeatherStatictics;
 import com.mercadolibre.mlgalaxy.repository.GalaxyWeatherRepository;
 import com.mercadolibre.mlgalaxy.repository.WeatherStaticticsRepository;
 import com.mercadolibre.mlgalaxy.service.WeatherStaticticsService;

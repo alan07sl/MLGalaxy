@@ -2,7 +2,7 @@ package com.mercadolibre.mlgalaxy.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mercadolibre.mlgalaxy.model.weather.WeatherStatictics;
+import com.mercadolibre.mlgalaxy.model.statictics.WeatherStatictics;
 import com.mercadolibre.mlgalaxy.service.WeatherStaticticsService;
 import org.junit.Before;
 import org.junit.Test;

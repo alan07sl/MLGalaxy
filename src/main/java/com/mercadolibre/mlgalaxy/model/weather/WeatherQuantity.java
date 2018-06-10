@@ -11,9 +11,13 @@ import javax.persistence.*;
 @Table(name = "WEATHER_QUANTITY")
 public class WeatherQuantity {
 
+    @Id
+    @GeneratedValue
     @JsonIgnore
     private Integer id;
+    @Enumerated
     private GalaxyWeatherType weather;
+    @Column(name = "QUANTITY", nullable = false)
     private Integer quantity;
 
     /**
@@ -39,8 +43,6 @@ public class WeatherQuantity {
     /**
      * @return the id
      */
-    @Id
-    @GeneratedValue
     public Integer getId() {
         return id;
     }
@@ -56,7 +58,6 @@ public class WeatherQuantity {
     /**
      * @return the weather
      */
-    @Enumerated
     public GalaxyWeatherType getWeather() {
         return weather;
     }
@@ -64,7 +65,6 @@ public class WeatherQuantity {
     /**
      * @return the quantity
      */
-    @Column(name = "QUANTITY", nullable = false)
     public Integer getQuantity() {
         return quantity;
     }
