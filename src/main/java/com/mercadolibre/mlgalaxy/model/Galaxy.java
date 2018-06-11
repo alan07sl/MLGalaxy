@@ -2,6 +2,7 @@ package com.mercadolibre.mlgalaxy.model;
 
 import com.mercadolibre.mlgalaxy.model.position.PositionCalculator;
 import com.mercadolibre.mlgalaxy.model.position.impl.PositionCalculatorImpl;
+import org.hibernate.annotations.Target;
 
 import javax.persistence.*;
 import java.awt.geom.Point2D;
@@ -22,8 +23,14 @@ public class Galaxy {
     @OneToMany(cascade = { CascadeType.ALL })
     @JoinColumn(name = "F_GALAXIA_ID")
     private List<Planet> planets;
-    @Column(name="SUN_COORDINATES", nullable = false)
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "x", column = @Column(name = "X_SOL")),
+            @AttributeOverride(name = "y", column = @Column(name = "Y_SOL")),
+    })
+    @Target(Point2D.Double.class)
     private Point2D sunCoordinates;
+    @Transient
     private final PositionCalculator<?> positionCalculator;
 
     /**

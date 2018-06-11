@@ -34,5 +34,23 @@ public class GalaxyWeatherServiceImpl implements GalaxyWeatherService{
         return galaxyWeatherRepository.findByDay(day);
     }
 
+    /**
+     * Persists the galaxy weather.
+     *
+     * @param galaxyWeather
+     *            {@link GalaxyWeather} Statictics to be persisted.
+     */
+    public void save(final GalaxyWeather galaxyWeather) {
+        galaxyWeatherRepository.save(galaxyWeather);
+    }
+
+    /**
+     * Cleans galaxy weather registries.
+     */
+    public void cleanData() {
+        LOGGER.info("Cleaning weather data");
+        galaxyWeatherRepository.deleteAll();
+    }
+
 
 }

@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface GalaxyWeatherService {
     Optional<GalaxyWeather> weatherByDay(final Integer day);
+    void save(GalaxyWeather galaxyWeather);
+    void cleanData();
 }

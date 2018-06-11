@@ -1,5 +1,7 @@
 package com.mercadolibre.mlgalaxy.model;
 
+import org.hibernate.annotations.Target;
+
 import javax.persistence.*;
 import java.awt.geom.Point2D;
 
@@ -19,7 +21,8 @@ public class Planet {
     private Integer angularVelocity;
     @Column(name = "SUN_DISTANCE", nullable = false)
     private Integer distanceToSun;
-    @Column(name = "POSITION", nullable = false)
+    @Embedded
+    @Target(Point2D.Double.class)
     private Point2D position;
 
     /**

@@ -1,7 +1,6 @@
 package com.mercadolibre.mlgalaxy.service.impl;
 
 import com.mercadolibre.mlgalaxy.model.statictics.WeatherStatictics;
-import com.mercadolibre.mlgalaxy.repository.GalaxyWeatherRepository;
 import com.mercadolibre.mlgalaxy.repository.WeatherStaticticsRepository;
 import com.mercadolibre.mlgalaxy.service.WeatherStaticticsService;
 import org.slf4j.Logger;
@@ -22,9 +21,6 @@ import java.util.Optional;
 public class WeatherStaticticsServiceImpl implements WeatherStaticticsService{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherStaticticsServiceImpl.class);
-
-    @Autowired
-    private GalaxyWeatherRepository galaxyWeatherRepository;
 
     @Autowired
     private WeatherStaticticsRepository weatherStaticticsRepository;
@@ -52,8 +48,7 @@ public class WeatherStaticticsServiceImpl implements WeatherStaticticsService{
      * Cleans weather registries.
      */
     public void cleanData() {
-        LOGGER.info("Limpiando datos de clima");
-        galaxyWeatherRepository.deleteAll();
+        LOGGER.info("Cleaning statictics data");
         weatherStaticticsRepository.deleteAll();
     }
 

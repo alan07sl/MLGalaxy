@@ -7,6 +7,6 @@ import java.util.Optional;
 public interface WeatherStaticticsService {
 
     Optional<WeatherStatictics> getStatictics();
-
+    void save(WeatherStatictics weatherStatictics);
     void cleanData();
 }
