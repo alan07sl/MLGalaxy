@@ -4,7 +4,7 @@ import com.mercadolibre.mlgalaxy.model.Galaxy;
 import com.mercadolibre.mlgalaxy.model.WeatherSimulation;
 import com.mercadolibre.mlgalaxy.model.position.impl.PositionCalculatorImpl;
 import com.mercadolibre.mlgalaxy.model.position.strategy.impl.SquaredRStrategy;
-import com.mercadolibre.mlgalaxy.model.statictics.WeatherStatictics;
+import com.mercadolibre.mlgalaxy.model.weather.statictics.WeatherStatictics;
 import com.mercadolibre.mlgalaxy.service.GalaxyService;
 import com.mercadolibre.mlgalaxy.service.GalaxyWeatherService;
 import com.mercadolibre.mlgalaxy.service.WeatherStaticticsService;

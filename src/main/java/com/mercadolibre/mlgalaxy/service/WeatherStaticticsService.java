@@ -1,6 +1,6 @@
 package com.mercadolibre.mlgalaxy.service;
 
-import com.mercadolibre.mlgalaxy.model.statictics.WeatherStatictics;
+import com.mercadolibre.mlgalaxy.model.weather.statictics.WeatherStatictics;
 
 import java.util.Optional;
 

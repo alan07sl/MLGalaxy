@@ -1,6 +1,6 @@
 package com.mercadolibre.mlgalaxy.controller;
 
-import com.mercadolibre.mlgalaxy.model.statictics.WeatherStatictics;
+import com.mercadolibre.mlgalaxy.model.weather.statictics.WeatherStatictics;
 import com.mercadolibre.mlgalaxy.service.WeatherStaticticsService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

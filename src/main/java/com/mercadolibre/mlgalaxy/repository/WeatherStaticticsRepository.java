@@ -1,6 +1,6 @@
 package com.mercadolibre.mlgalaxy.repository;
 
-import com.mercadolibre.mlgalaxy.model.statictics.WeatherStatictics;
+import com.mercadolibre.mlgalaxy.model.weather.statictics.WeatherStatictics;
 import org.springframework.data.repository.CrudRepository;
 
 /**

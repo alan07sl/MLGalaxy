@@ -1,4 +1,4 @@
-package com.mercadolibre.mlgalaxy.model.statictics;
+package com.mercadolibre.mlgalaxy.model.weather.statictics;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mercadolibre.mlgalaxy.model.weather.GalaxyWeather;
