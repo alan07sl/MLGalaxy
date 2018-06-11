@@ -41,7 +41,7 @@ public class GalaxyWeatherControllerTest {
     private int port;
 
     private final String URL = "http://localhost:";
-    private final String REQUIRED_PARAMETER_NOT_PRESENT_ERROR_MESSAGE = "A required parameter is missing";
+    private final String REQUIRED_PARAMETER_NOT_PRESENT_ERROR_MESSAGE = "A required parameter is missing: \"dia\"";
     private final String RESOURCE_NOT_FOUND = "The resource is not present";
 
     @Mock
