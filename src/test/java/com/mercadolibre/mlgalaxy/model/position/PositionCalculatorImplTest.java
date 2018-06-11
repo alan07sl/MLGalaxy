@@ -1,6 +1,7 @@
 package com.mercadolibre.mlgalaxy.model.position;
 
 import com.mercadolibre.mlgalaxy.model.Planet;
+import com.mercadolibre.mlgalaxy.model.position.impl.PositionCalculatorImpl;
 import org.junit.Test;
 
 import java.awt.geom.Point2D;

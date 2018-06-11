@@ -1,7 +1,7 @@
 package com.mercadolibre.mlgalaxy.model;
 
 import com.mercadolibre.mlgalaxy.model.position.PositionCalculator;
-import com.mercadolibre.mlgalaxy.model.position.PositionCalculatorImpl;
+import com.mercadolibre.mlgalaxy.model.position.impl.PositionCalculatorImpl;
 
 import javax.persistence.*;
 import java.awt.geom.Point2D;
@@ -97,7 +97,7 @@ public class Galaxy {
      * @param name
      *            {@link String} Name of the planet.
      * @param angularVelocity
-     *            {@link Short} The angular velocity of the planet.
+     *            {@link Integer} The angular velocity of the planet.
      * @param sunDistance
      *            {@link Integer} The distance from this planet to the sun.
      * @param hourly
@@ -107,7 +107,7 @@ public class Galaxy {
      * @param y
      *            {@link Integer} Y coordinate.
      */
-    public void addPlanet(final String name, final short angularVelocity, final int sunDistance, final boolean hourly,
+    public void addPlanet(final String name, final int angularVelocity, final int sunDistance, final boolean hourly,
                           final int x, final int y) {
         planets.add(new Planet(name, angularVelocity, sunDistance, hourly, positionCalculator.createCoordinates(x, y)));
     }

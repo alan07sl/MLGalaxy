@@ -1,6 +1,7 @@
-package com.mercadolibre.mlgalaxy.model.position;
+package com.mercadolibre.mlgalaxy.model.position.impl;
 
 import com.mercadolibre.mlgalaxy.model.Planet;
+import com.mercadolibre.mlgalaxy.model.position.PositionCalculator;
 
 import java.awt.geom.Point2D;
 import java.util.List;
@@ -12,6 +13,9 @@ public class PositionCalculatorImpl implements PositionCalculator<Point2D.Double
 
     private final double ZERO = 0.0;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Point2D.Double calculatePosition(final int day, final int angularVelocity, final int sunDistance) {
         int distance = (day * angularVelocity);
@@ -24,13 +28,19 @@ public class PositionCalculatorImpl implements PositionCalculator<Point2D.Double
                 (int) (sunDistance * Math.sin(Math.toRadians(angle))));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Point2D.Double createCoordinates(final double x, final double y) {
         return new Point2D.Double(x, y);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean sunAligned(final List<Planet> planets, final Point2D.Double sunCoordinates) {
+    public boolean sunAligned(final List<Planet> planets, final Point2D sunCoordinates) {
         if (!aligned(planets)) {
             return false;
         }
@@ -38,6 +48,9 @@ public class PositionCalculatorImpl implements PositionCalculator<Point2D.Double
         return isStraight(planets.get(0).getPosition(), planets.get(1).getPosition(), sunCoordinates);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean aligned(final List<Planet> planets) {
         boolean isStraight = true;
@@ -96,7 +109,7 @@ public class PositionCalculatorImpl implements PositionCalculator<Point2D.Double
      * @return {@link Boolean} Whether the sun {@link Point2D.Double} is inside a triangle conformed by the planets {@link List} on the list given.
      */
     @Override
-    public boolean planetTriangleContainsTheSun(Point2D.Double sunPosition, List<Planet> planets) {
+    public boolean planetTriangleContainsTheSun(Point2D sunPosition, List<Planet> planets) {
         if(planets.size() < 3) return false;
         return pointInTriangle(sunPosition, planets.get(0).getPosition(),planets.get(1).getPosition(), planets.get(2).getPosition());
     }

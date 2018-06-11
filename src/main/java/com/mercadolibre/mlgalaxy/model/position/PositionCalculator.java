@@ -50,7 +50,7 @@ public interface PositionCalculator <T extends Point2D>{
      *
      * @return {@link Boolean} Whether all the planets and the sun are aligned.
      */
-    boolean sunAligned(final List<Planet> planets, final T sunCoordinates);
+    boolean sunAligned(final List<Planet> planets, final Point2D sunCoordinates);
 
     /**
      * Checks if the planets are all aligned.
@@ -72,6 +72,6 @@ public interface PositionCalculator <T extends Point2D>{
      *
      * @return {@link Boolean} Whether the sun is inside of the figure conformed by the planets given.
      */
-    boolean planetTriangleContainsTheSun(final T sunCoordinates, final List<Planet> planets);
+    boolean planetTriangleContainsTheSun(final Point2D sunCoordinates, final List<Planet> planets);
 
 }

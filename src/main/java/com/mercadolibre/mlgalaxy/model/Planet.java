@@ -35,7 +35,7 @@ public class Planet {
      * @param name
      *            {@link String} The Planet name.
      * @param angularVelocity
-     *            {@link Short} Planet's angular velocity.
+     *            {@link Integer} Planet's angular velocity.
      * @param distanceToSun
      *            {@link Integer} Distance between the planet and the sun.
      * @param hourly
