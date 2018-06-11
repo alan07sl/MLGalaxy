@@ -9,10 +9,9 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
 
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class GlobalExceptionHandlerTest {
 
@@ -27,25 +26,25 @@ public class GlobalExceptionHandlerTest {
     @Test
     public void illegalArgumentExceptionHandlerTest() {
         ResponseEntity<Object> response = handler.handleIllegalArgument(new IllegalArgumentException(PARAMETER_NAME), mockRequest);
-        assertNotNull(response);
-        assertTrue(response.getStatusCode().is4xxClientError());
+        assertThat(response, notNullValue());
+        assertThat(response.getStatusCode().is4xxClientError(), is(Boolean.TRUE));
         assertThat(response.getStatusCode(), equalTo(HttpStatus.BAD_REQUEST));
-        assertTrue(response.getBody().toString().contains(PARAMETER_NAME));
+        assertThat(response.getBody().toString(), containsString(PARAMETER_NAME));
     }
 
     @Test
     public void ResourceNotFoundExceptionHandlerTest() {
         ResponseEntity<Object> response = handler.handleResourceNotFound(new ResourceNotFoundException(), mockRequest);
-        assertNotNull(response);
-        assertTrue(response.getStatusCode().is4xxClientError());
+        assertThat(response, notNullValue());
+        assertThat(response.getStatusCode().is4xxClientError(), is(Boolean.TRUE));
         assertThat(response.getStatusCode(), equalTo(HttpStatus.NOT_FOUND));
-        assertTrue(response.getBody().toString().contains(RESOURCE_NOT_PRESENT));
+        assertThat(response.getBody().toString(), containsString(RESOURCE_NOT_PRESENT));
     }
 
     @Test
     public void exceptionTest() {
         final Map<String, Object> response = handler.handle(new Exception());
-        assertNotNull(response);
-        assertNotNull(response.get(GlobalExceptionHandler.ERROR_KEY));
+        assertThat(response, notNullValue());
+        assertThat(response.get(GlobalExceptionHandler.ERROR_KEY), notNullValue());
     }
 }

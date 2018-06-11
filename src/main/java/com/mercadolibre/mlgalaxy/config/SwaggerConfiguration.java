@@ -9,10 +9,18 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * Swagger configuration class.
+ */
 @EnableSwagger2
 @Configuration
 public class SwaggerConfiguration {
 
+    /**
+     * Generates and builds the Docket bean.
+     *
+     * @return {@link Docket}
+     */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -24,6 +32,11 @@ public class SwaggerConfiguration {
                 .apiInfo(apiInfo());
     }
 
+    /**
+     * Generates and builds the API information which describes the API.
+     *
+     * @return {@link ApiInfo}
+     */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Galaxy weather forecast API")
