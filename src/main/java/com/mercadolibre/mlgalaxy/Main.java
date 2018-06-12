@@ -41,10 +41,10 @@ public class Main {
 
         //Print results of weather type occurrences
         simulation.getWeatherQuantityMap().keySet().forEach(eg ->
-            LOGGER.info(String.format("Hay %d dias de %s", simulation.getWeatherQuantityMap().get(eg), eg))
+            LOGGER.info("Hay {} dias de {}", simulation.getWeatherQuantityMap().get(eg), eg)
         );
 
         //Print max rain day
-        LOGGER.info(String.format("Pico maximo de lluvia, dia %d", simulation.getMaxRainDay()));
+        LOGGER.info("Pico maximo de lluvia, dia {}", simulation.getMaxRainDay());
     }
 }

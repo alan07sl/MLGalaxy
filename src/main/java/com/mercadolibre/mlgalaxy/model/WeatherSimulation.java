@@ -2,13 +2,12 @@ package com.mercadolibre.mlgalaxy.model;
 
 import com.mercadolibre.mlgalaxy.model.position.PositionCalculator;
 import com.mercadolibre.mlgalaxy.model.position.strategy.PositionStrategy;
-import com.mercadolibre.mlgalaxy.model.weather.statictics.WeatherStatictics;
 import com.mercadolibre.mlgalaxy.model.weather.GalaxyWeather;
 import com.mercadolibre.mlgalaxy.model.weather.GalaxyWeatherType;
 import com.mercadolibre.mlgalaxy.model.weather.handler.WeatherHandlerChain;
+import com.mercadolibre.mlgalaxy.model.weather.statictics.WeatherStatictics;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

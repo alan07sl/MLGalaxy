@@ -88,50 +88,71 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.21.0</version>
+				<configuration>
+					<!-- (2)  setup the argLine and run the unit tests.   **NOTE the "jacocArgeLine" property was configured the "prepare-agent" goal of Jacoco  (see below) -->
+					<!--
+                    if you want to resolve the property value as late as possible (i.e. your dyamically alter this property value before reaching this phase
+                     Maven gives you option to use @{jacocoArgLine} instead
+                     -->
+					<argLine>${jacocoArgLine} -Xmx256m</argLine>
+				</configuration>
+			</plugin>
+
+			<!-- the jacoco plugin, we are going to use 2 goals provided by this plugin -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.9</version>
-				<configuration>
-					<excludes>
-						<exclude>com/mercadolibre/mlgalaxy</exclude>
-					</excludes>
-				</configuration>
+				<version>0.8.1</version>
+
 				<executions>
+
+					<!--  (1)  Prepare agent runs in the init phase, it setups the jacocoProperty,  so we can insert this to the maven sure fire argLine and get to run jacoco as agent -->
 					<execution>
+						<id>prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
+						<configuration>
+							<propertyName>jacocoArgLine</propertyName>
+							<includes>
+								<include>com.mercadolibre.mlgalaxy.*</include>
+							</includes>
+						</configuration>
 					</execution>
+
+					<!--  (3) the check goal by default runs in the verify phase, we want to fail the build if mimimum code coverage checks aren't met -->
 					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>jacoco-check</id>
+						<id>check</id>
 						<goals>
 							<goal>check</goal>
 						</goals>
 						<configuration>
 							<rules>
-								<rule>
-									<element>PACKAGE</element>
+								<!-- All classes must have 80% line coverage. !-->
+								<rule >
+									<element>BUNDLE</element>
 									<limits>
-										<limit>
+										<limit >
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
 											<minimum>0.60</minimum>
 										</limit>
 									</limits>
+									<excludes>
+										<exclude>com.mercadolibre.mlgalaxy.Main</exclude>
+									</excludes>
 								</rule>
 							</rules>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
 	</build>
 
