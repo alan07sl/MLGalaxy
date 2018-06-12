@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class PositionCalculatorImpl implements PositionCalculator<Point2D.Double> {
 
-    private final double ZERO = 0.0;
+    private static final double ZERO = 0.0;
 
     /**
      * {@inheritDoc}
@@ -130,7 +130,9 @@ public class PositionCalculatorImpl implements PositionCalculator<Point2D.Double
      */
     private boolean pointInTriangle (Point2D pt, Point2D v1, Point2D v2, Point2D v3)
     {
-        boolean b1, b2, b3;
+        boolean b1;
+        boolean b2;
+        boolean b3;
 
         b1 = sign(pt, v1, v2) < ZERO;
         b2 = sign(pt, v2, v3) < ZERO;

@@ -31,12 +31,12 @@ import java.util.Map;
 @Component
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger EXCEPTION_LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     protected static final String ERROR_KEY = "Error";
-    private final String ERROR_DEFAULT_MESSAGE = "An error has occurred";
-    private final String REQUIRED_PARAMETER_NOT_PRESENT_ERROR_MESSAGE = "A required parameter is missing: ";
-    private final String RESOURCE_NOT_FOUND = "The resource is not present";
+    private static final String ERROR_DEFAULT_MESSAGE = "An error has occurred";
+    private static final String REQUIRED_PARAMETER_NOT_PRESENT_ERROR_MESSAGE = "A required parameter is missing: ";
+    private static final String RESOURCE_NOT_FOUND = "The resource is not present";
 
     @ExceptionHandler(value = { IllegalArgumentException.class })
     protected ResponseEntity<Object> handleIllegalArgument(RuntimeException ex, WebRequest request) {
@@ -62,7 +62,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
     @ExceptionHandler
     @ResponseBody
     public Map<String, Object> handle(final Throwable exception) {
-        LOGGER.debug("", exception);
+        EXCEPTION_LOGGER.debug("", exception);
         return error(ERROR_DEFAULT_MESSAGE);
     }
 

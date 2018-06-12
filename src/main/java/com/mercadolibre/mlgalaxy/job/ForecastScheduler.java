@@ -50,7 +50,7 @@ public class ForecastScheduler {
         galaxy.addPlanet("Vulcano",  5, 1000, false, 0, 1000);
         galaxyService.save(galaxy);
 
-        LOGGER.info("Forecasting the next " + YEAR_TO_BE_SIMULATED + " years");
+        LOGGER.info(String.format("Forecasting the next %s years", YEAR_TO_BE_SIMULATED));
         final WeatherStatictics statictics = new WeatherSimulation(galaxy, new SquaredRStrategy()).simulateUntil(A_YEAR * YEAR_TO_BE_SIMULATED);
         weatherStaticticsService.save(statictics);
         LOGGER.info("Forecast complete");

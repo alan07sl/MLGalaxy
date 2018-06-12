@@ -24,7 +24,7 @@ public class WeatherStatictics {
     private Integer rainMaxDay;
     @OneToMany(cascade = { CascadeType.ALL })
     @JoinColumn(name = "F_STATICTICS_ID")
-    private List<WeatherQuantity> QuantityWeather;
+    private List<WeatherQuantity> quantityWeather;
     @OneToMany(cascade = { CascadeType.ALL })
     @JoinColumn(name = "F_STATICTICS_ID")
     @JsonIgnore
@@ -35,7 +35,7 @@ public class WeatherStatictics {
      */
     protected WeatherStatictics() {
         weathers = new ArrayList<>();
-        QuantityWeather = new ArrayList<>();
+        quantityWeather = new ArrayList<>();
     }
 
     /**
@@ -49,10 +49,10 @@ public class WeatherStatictics {
     public WeatherStatictics(final Integer rainMaxDay, final List<GalaxyWeather> weathers) {
         this.rainMaxDay = rainMaxDay;
         this.weathers = weathers;
-        QuantityWeather = weathers.stream()
-                        .collect(Collectors.groupingBy(weather -> weather.getWeather(), Collectors.counting())) //
+        quantityWeather = weathers.stream()
+                        .collect(Collectors.groupingBy(weather -> weather.getWeather(), Collectors.counting()))
                         .entrySet().stream()
-                        .map(entry -> new WeatherQuantity(entry.getKey(), entry.getValue().intValue())) //
+                        .map(entry -> new WeatherQuantity(entry.getKey(), entry.getValue().intValue()))
                         .collect(Collectors.toList());
     }
 
@@ -102,17 +102,17 @@ public class WeatherStatictics {
     }
 
     /**
-     * @return QuantityWeather
+     * @return quantityWeather
      */
     public List<WeatherQuantity> getQuantityWeather() {
-        return QuantityWeather;
+        return quantityWeather;
     }
 
     /**
      * @param quantityWeather
-     *          QuantityWeather to set
+     *          quantityWeather to set
      */
     public void setQuantityWeather(final List<WeatherQuantity> quantityWeather) {
-        this.QuantityWeather = quantityWeather;
+        this.quantityWeather = quantityWeather;
     }
 }

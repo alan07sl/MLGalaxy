@@ -4,11 +4,16 @@ import com.mercadolibre.mlgalaxy.model.Galaxy;
 import com.mercadolibre.mlgalaxy.model.WeatherSimulation;
 import com.mercadolibre.mlgalaxy.model.position.impl.PositionCalculatorImpl;
 import com.mercadolibre.mlgalaxy.model.position.strategy.impl.SquaredRStrategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Main class to run the system simulation without spring-boot.
  */
 public class Main {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+
 
     private static final int A_YEAR = 365;
     private static final int YEAR_TO_BE_SIMULATED = 10;
@@ -35,11 +40,11 @@ public class Main {
         simulation.simulateUntil(A_YEAR * YEAR_TO_BE_SIMULATED);
 
         //Print results of weather type occurrences
-        simulation.getWeatherQuantityMap().keySet().forEach(eg -> {
-            System.out.println(String.format("Hay %d dias de %s", simulation.getWeatherQuantityMap().get(eg), eg));
-        });
+        simulation.getWeatherQuantityMap().keySet().forEach(eg ->
+            LOGGER.info(String.format("Hay %d dias de %s", simulation.getWeatherQuantityMap().get(eg), eg))
+        );
 
         //Print max rain day
-        System.out.println(String.format("Pico maximo de lluvia, dia %d", simulation.getMaxRainDay()));
+        LOGGER.info(String.format("Pico maximo de lluvia, dia %d", simulation.getMaxRainDay()));
     }
 }

@@ -7,6 +7,7 @@ import com.mercadolibre.mlgalaxy.model.weather.GalaxyWeather;
 import com.mercadolibre.mlgalaxy.model.weather.GalaxyWeatherType;
 import com.mercadolibre.mlgalaxy.model.weather.handler.WeatherHandlerChain;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class WeatherSimulation {
     private double maxPerimeter = Double.MIN_VALUE;
     private Integer maxRainDay = 0;
     private int actualDay = 0;
-    private final Map<GalaxyWeatherType, Integer> WeatherQuantityMap = new HashMap<>();
+    private final Map<GalaxyWeatherType, Integer> weatherQuantityMap = new EnumMap<>(GalaxyWeatherType.class);
     private static final WeatherHandlerChain WEATHER_HANDLER_CHAIN = new WeatherHandlerChain();
     private final PositionCalculator<?> positionCalculator;
 
@@ -38,14 +39,14 @@ public class WeatherSimulation {
     public WeatherSimulation(final Galaxy galaxy, final PositionStrategy<?, ?> positionStrategy) {
         this.galaxy = galaxy;
         positionCalculator = positionStrategy.getPositionCalculator();
-        Stream.of(GalaxyWeatherType.values()).forEach(e -> WeatherQuantityMap.put(e, 0));
+        Stream.of(GalaxyWeatherType.values()).forEach(e -> weatherQuantityMap.put(e, 0));
     }
 
     /**
-     * @return the WeatherQuantityMap
+     * @return the weatherQuantityMap
      */
     public final Map<GalaxyWeatherType, Integer> getWeatherQuantityMap() {
-        return WeatherQuantityMap;
+        return weatherQuantityMap;
     }
 
     /**
@@ -136,7 +137,7 @@ public class WeatherSimulation {
      * @return {@link GalaxyWeather} The weather generated.
      */
     public GalaxyWeather acumWeatherTypeDay(final GalaxyWeatherType weatherType) {
-        WeatherQuantityMap.compute(weatherType, (k, v) -> v + 1);
+        weatherQuantityMap.compute(weatherType, (k, v) -> v + 1);
         return new GalaxyWeather(weatherType, actualDay);
     }
 
