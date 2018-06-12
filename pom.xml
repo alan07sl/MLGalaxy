@@ -140,10 +140,16 @@
 										<limit >
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.60</minimum>
+											<minimum>0.75</minimum>
+										</limit>
+										<limit >
+											<counter>CLASS</counter>
+											<value>MISSEDCOUNT</value>
+											<maximum>1</maximum>
 										</limit>
 									</limits>
 									<excludes>
+										<exclude>com.mercadolibre.mlgalaxy.MlgalaxyApplication</exclude>
 										<exclude>com.mercadolibre.mlgalaxy.Main</exclude>
 									</excludes>
 								</rule>

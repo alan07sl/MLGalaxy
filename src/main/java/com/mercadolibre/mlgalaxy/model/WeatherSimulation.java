@@ -7,6 +7,7 @@ import com.mercadolibre.mlgalaxy.model.weather.GalaxyWeatherType;
 import com.mercadolibre.mlgalaxy.model.weather.handler.WeatherHandlerChain;
 import com.mercadolibre.mlgalaxy.model.weather.statictics.WeatherStatictics;
 
+import java.awt.geom.Point2D;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class WeatherSimulation {
     private int actualDay = 0;
     private final Map<GalaxyWeatherType, Integer> weatherQuantityMap = new EnumMap<>(GalaxyWeatherType.class);
     private static final WeatherHandlerChain WEATHER_HANDLER_CHAIN = new WeatherHandlerChain();
-    private final PositionCalculator<?> positionCalculator;
+    private final PositionCalculator<Point2D.Double> positionCalculator;
 
     /**
      * Constructor.
@@ -35,7 +36,7 @@ public class WeatherSimulation {
      * @param positionStrategy
      *            {@link PositionStrategy} Position strategy to be applied.
      */
-    public WeatherSimulation(final Galaxy galaxy, final PositionStrategy<?, ?> positionStrategy) {
+    public WeatherSimulation(final Galaxy galaxy, final PositionStrategy<Point2D.Double, ?> positionStrategy) {
         this.galaxy = galaxy;
         positionCalculator = positionStrategy.getPositionCalculator();
         Stream.of(GalaxyWeatherType.values()).forEach(e -> weatherQuantityMap.put(e, 0));
@@ -79,7 +80,7 @@ public class WeatherSimulation {
     /**
      * @return the positionCalculator
      */
-    public PositionCalculator<?> getPositionCalculator() {
+    public PositionCalculator<Point2D.Double> getPositionCalculator() {
         return positionCalculator;
     }
 

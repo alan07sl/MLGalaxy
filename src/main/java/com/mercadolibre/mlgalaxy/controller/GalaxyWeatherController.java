@@ -26,7 +26,7 @@ public class GalaxyWeatherController {
     /**
      * Gets the weather for a specific day.
      *
-     * @param day
+     * @param optionalDay
      *            {@link Integer} The specified day.
      * @return {@link GalaxyWeather}
      */
@@ -34,8 +34,8 @@ public class GalaxyWeatherController {
     @ApiOperation(value = "Get the weather for a particular day", notes = "Get the weather for a particular day. e.g. GET → http://….../clima?dia=566 → Respuesta: {“dia”:566, “clima”:”lluvia”}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final GalaxyWeather weatherByDay(@RequestParam(name="dia") Optional<Integer> day) {
-        day.orElseThrow(() -> new IllegalArgumentException("dia"));
-        return galaxyWeatherService.weatherByDay(day.get()).orElseThrow(() -> new ResourceNotFoundException());
+    public final GalaxyWeather weatherByDay(@RequestParam(name="dia") Optional<Integer> optionalDay) {
+        Integer day = optionalDay.orElseThrow(() -> new IllegalArgumentException("dia"));
+        return galaxyWeatherService.weatherByDay(day).orElseThrow(ResourceNotFoundException::new);
     }
 }

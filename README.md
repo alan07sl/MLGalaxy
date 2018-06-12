@@ -27,4 +27,10 @@ http://mlgalaxy.herokuapp.com/clima?dia={dayNumber} where day number is the day 
 To see the **CI current state** please enter the following **[URL](https://travis-ci.org/alan07sl/MLGalaxy)**
 
 ### Unit testing
-Unit test were performed with the best practices, such as using assertThat to have more explicit failures, mocking dependencies and web requests, etc.
+- **Unit tests** were performed with the best practices, such as using assertThat to have more explicit failures, mocking dependencies and web requests, etc.
+- **JaCoCo** checks whether the line **test coverage** over the bundle is greater than **75 percent**
+- **JaCoCo** checks that all classes but Main are being unit tested.
+
+### Code quality
+- **CI** is integrated with **JaCoCo** and **Sonar Cloud** to ensure quality.
+- The **Sonar Cloud** project can be accessed to be checked on this **[URL](https://sonarcloud.io/organizations/fjp1jlkt1iuh4afm159x760xoz81xl3/projects)**

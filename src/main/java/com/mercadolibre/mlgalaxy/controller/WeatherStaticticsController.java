@@ -30,6 +30,6 @@ public class WeatherStaticticsController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public final WeatherStatictics statictics() {
-        return weatherStaticticsService.getStatictics().orElseThrow(() -> new ResourceNotFoundException());
+        return weatherStaticticsService.getStatictics().orElseThrow(ResourceNotFoundException::new);
     }
 }
